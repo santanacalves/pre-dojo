@@ -3,7 +3,6 @@
  */
 package main.java;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map.Entry;
 
@@ -24,12 +23,16 @@ public class Partida {
 		this.setDataInicio(dataInicio);
 	}
 	
-	public void addAssasinatoJogador(String nomeJogador, String nomeArma) {
+	public void addAssassinatoJogador(String nomeJogador, String nomeArma) {
 		listaJogadores.addAssassinato(nomeJogador, nomeArma);
 	}
 
 	public void addMorteJogador(String nomeJogador) {
 		listaJogadores.addMorte(nomeJogador);
+	}
+
+	public void atribuiAwards() {
+		listaJogadores.atribuiAwards();
 	}
 
 	public Entry<String, Jogador> getVencedor() {
@@ -94,5 +97,4 @@ public class Partida {
 	public void setListaJogadores(ListaJogadores listaJogadores) {
 		this.listaJogadores = listaJogadores;
 	}
-
 }

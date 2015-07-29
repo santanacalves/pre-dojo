@@ -22,48 +22,113 @@ public class Jogador {
 		this.setAwards(0);
 	}
 
+	
+	/**
+	 * @param nomeArma a arma que foi usada no assassinato
+	 * Incrementa assassinantos e incrementa usos ou adiciona arma a lista de armas usadas
+	 */
+	public void addAssassinato(String nomeArma) {
+		this.setAssassinatos(this.getAssassinatos() + 1);
+		this.addKillStreak();
+		
+		if( this.getArmasUsadas().get(nomeArma) != null ){
+			this.getArmasUsadas().put(nomeArma, this.getArmasUsadas().get(nomeArma)	+ 1);
+		} else {
+			this.getArmasUsadas().put(nomeArma, 1);
+		}
+
+	}
+
+	/**
+	 * Incrementa Killstreak, testa se é maior que o maior atual e substitui, se for
+	 */
+	private void addKillStreak() {
+		this.setKillStreakAtual(this.getKillStreakAtual() + 1);
+		
+		if ( this.getKillStreakAtual() > this.getMaiorKillStreak() ){
+			this.setMaiorStreak(this.getKillStreakAtual());
+		}
+	}
+
+	/**
+	 * Incrementa morte, zera killstreak
+	 */
+	public void addMorte() {
+		this.setMortes(this.getMortes() + 1);
+		
+		this.setKillStreakAtual(0);
+	}
+	
+	/**
+	 * Incrementa awards
+	 */
+	public void addAward() {
+		this.setAwards(this.getAwards() + 1);
+	}
+
+	/**
+	 * @return arma preferida do jogador
+	 */
+	public String getArmaPreferida(){
+		Entry<String, Integer> maiorNumeroAssassinatos = null;
+		for(Entry<String, Integer> arma : this.getArmasUsadas().entrySet()) {
+		    if (maiorNumeroAssassinatos == null || arma.getValue() > maiorNumeroAssassinatos.getValue()) {
+		    	maiorNumeroAssassinatos = arma;
+		    }
+		}
+		
+		return maiorNumeroAssassinatos.getKey();
+	}
+
 	/**
 	 * @return the nickname
 	 */
 	public String getNomeJogador() {
 		return nomeJogador;
 	}
+	
 	/**
 	 * @param nickname the nickname to set
 	 */
 	public void setNomeJogador(String nickname) {
 		this.nomeJogador = nickname;
 	}
+	
 	/**
 	 * @return the assassinatos
 	 */
 	public Integer getAssassinatos() {
 		return assassinatos;
 	}
+	
 	/**
 	 * @param assassinatos the assassinatos to set
 	 */
 	public void setAssassinatos(Integer assassinatos) {
 		this.assassinatos = assassinatos;
 	}
+	
 	/**
 	 * @return the mortes
 	 */
 	public Integer getMortes() {
 		return mortes;
 	}
+	
 	/**
 	 * @param mortes the mortes to set
 	 */
 	public void setMortes(Integer mortes) {
 		this.mortes = mortes;
 	}
+
 	/**
 	 * @return the killStreakAtual
 	 */
 	public Integer getKillStreakAtual() {
 		return killStreakAtual;
 	}
+	
 	/**
 	 * @param killStreakAtual the killStreakAtual to set
 	 */
@@ -94,43 +159,6 @@ public class Jogador {
 	public void setArmasUsadas(Map<String, Integer> armasUsadas) {
 		this.armasUsadas = armasUsadas;
 	}
-	
-	public void addAssassinato(String nomeArma) {
-		this.setAssassinatos(this.getAssassinatos() + 1);
-		this.addKillStreak();
-		
-		if( this.getArmasUsadas().get(nomeArma) != null ){
-			this.getArmasUsadas().put(nomeArma, this.getArmasUsadas().get(nomeArma)	+ 1);
-		} else {
-			this.getArmasUsadas().put(nomeArma, 1);
-		}
-
-	}
-
-	private void addKillStreak() {
-		this.setKillStreakAtual(this.getKillStreakAtual() + 1);
-		
-		if ( this.getKillStreakAtual() > this.getMaiorKillStreak() ){
-			this.setMaiorStreak(this.getKillStreakAtual());
-		}
-	}
-
-	public void addMorte() {
-		this.setMortes(this.getMortes() + 1);
-		
-		this.setKillStreakAtual(0);
-	}
-	
-	public String getArmaPreferida(){
-		Entry<String, Integer> maiorNumeroAssassinatos = null;
-		for(Entry<String, Integer> arma : this.getArmasUsadas().entrySet()) {
-		    if (maiorNumeroAssassinatos == null || arma.getValue() > maiorNumeroAssassinatos.getValue()) {
-		    	maiorNumeroAssassinatos = arma;
-		    }
-		}
-		
-		return maiorNumeroAssassinatos.getKey();
-	}
 
 	/**
 	 * @return the maiorKillStreak
@@ -145,7 +173,4 @@ public class Jogador {
 	public void setMaiorStreak(Integer maiorKillStreak) {
 		this.maiorKillStreak = maiorKillStreak;
 	}
-	
-
-
 }

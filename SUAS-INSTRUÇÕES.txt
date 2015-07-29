@@ -1,2 +1,5 @@
-Coloque aqui suas instruções ou comentários que ache útil/relevantes para possamos ler 
-quando estivermos avaliando a sua solução
+Log um pouco incrementado para cobrir casos requisitados, caso deseje ver o log original, substituir a String passada na linha 19 da classe Main para matchOriginal.log.
+
+Para testar o programa, basta rodar a classe Main.
+
+Test Suite criada para rodar todos os testes unitários.

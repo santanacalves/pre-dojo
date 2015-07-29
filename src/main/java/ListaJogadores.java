@@ -36,6 +36,15 @@ public class ListaJogadores {
 		}
 	}
 	
+	public void atribuiAwards() {
+		for(Entry<String, Jogador> jogador : this.getLista().entrySet()) {
+		    if (jogador.getValue().getMortes() == 0) {
+		    	jogador.getValue().addAward();
+		    }
+		}
+		
+	}
+
 	public Entry<String, Jogador> getVencedor(){
 		Entry<String, Jogador> vencedor = null;
 		for(Entry<String, Jogador> jogador : this.getLista().entrySet()) {
@@ -72,5 +81,4 @@ public class ListaJogadores {
 	public void setLista(Map<String, Jogador> listaJogadores) {
 		this.listaJogadores = listaJogadores;
 	}
-
 }
